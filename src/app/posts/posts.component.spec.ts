@@ -1,18 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PostsComponent } from './posts.component';
+import {PostsComponent} from './posts.component';
 
 describe('PostsComponent', () => {
   let component: PostsComponent;
   let fixture: ComponentFixture<PostsComponent>;
+  let h1: HTMLElement
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PostsComponent ]
+      declarations: [PostsComponent]
     })
-    .compileComponents();
+      .compileComponents();
     fixture = TestBed.createComponent(PostsComponent);
     component = fixture.componentInstance;
+    h1 = fixture.nativeElement.querySelector('h1');
     fixture.detectChanges();
   });
 
@@ -22,18 +24,26 @@ describe('PostsComponent', () => {
 
   it(`shouldn't say hello in start`, () => {
     const message = component.message;
-    expect(message).toBe('no say hallo(')
+    const expectedMessage = 'no say hallo(';
+    expect(message).toBe(expectedMessage)
+    expect(h1.textContent).toContain(expectedMessage)
   })
 
   it(`should say hello`, () => {
     component.sayHello();
+    fixture.detectChanges()
     const message = component.message;
-    expect(message).toBe('hello!')
+    const expectedMessage = 'hello!';
+    expect(message).toBe(expectedMessage)
+    expect(h1.textContent).toContain(expectedMessage)
   })
 
   it(`should say bye`, () => {
     component.sayBye();
+    fixture.detectChanges()
     const message = component.message;
-    expect(message).toBe('bue!')
+    const expectedMessage = 'bue!';
+    expect(message).toBe(expectedMessage)
+    expect(h1.textContent).toContain(expectedMessage)
   })
 });
